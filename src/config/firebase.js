@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithPopup, OAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCyGN5LO-J23PUEV7yyvjOOwjAyahcimHM',
-  // apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyAIHFMwwQrrMWhQJA0h2PyR1jKQEDhVt5g",
+  authDomain: "sentiment-analyzer-8b590.firebaseapp.com",
+  projectId: "sentiment-analyzer-8b590",
+  storageBucket: "sentiment-analyzer-8b590.appspot.com",
+  messagingSenderId: "966109779808",
+  appId: "1:966109779808:web:2741c02b6acd5936a73005",
+  measurementId: "G-T1ZQDGCQF0"
 };
 const app = initializeApp(firebaseConfig);
 
