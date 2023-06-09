@@ -1,66 +1,65 @@
-import { initializeApp } from "firebase/app";
-import { OAuthProvider, getAuth } from "firebase/auth";
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithPopup, OAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-  // apiKey: "AIzaSyCyGN5LO-J23PUEV7yyvjOOwjAyahcimHM",
-//   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-//   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-//   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-//   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-//   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-//   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: 'AIzaSyCyGN5LO-J23PUEV7yyvjOOwjAyahcimHM',
+  authDomain: 'next-student-feedback.firebaseapp.com',
+  projectId: 'next-student-feedback',
+  storageBucket: 'next-student-feedback.appspot.com',
+  messagingSenderId: '909976799198',
+  appId: '1:909976799198:web:88472cf1fd17898bd5ff4f',
 };
+const app = initializeApp(firebaseConfig);
 
-export const app = initializeApp(firebaseConfig),
-  auth = getAuth(),
-  microsoftProvider = new OAuthProvider("microsoft.com");
+export const auth = getAuth(app);
 
-export const db = getFirestore(app);
-const usersRef = collection(db, "users");
+export const microsoftProvider = new OAuthProvider('microsoft.com');
 
-export const getUserDocument = async (userUid) => {
-  const userRef = doc(usersRef, userUid);
+// microsoftProvider.setCustomParameters({
+//   prompt: 'consent',
+//   tenant: '',
+//   client_id: ' 6fc362f9-4db9-4992-8a5d-778e8d13bbfd',
+//   response_type: '',
+//   redirect_uri: 'https://next-student-feedback.firebaseapp.com/__/auth/handler',
+//   scope: ['user.read'],
+//   response_mode: '',
+// });
 
-  const userSnapshot = await getDoc(userRef);
+export const signInWithMicrosoftAsync = async () => {
+  const res = await signInWithPopup(auth, microsoftProvider);
 
-  return userSnapshot;
-};
+  try {
+    const credential = OAuthProvider.credentialFromResult(res);
+    const { accessToken, idToken } = credential;
 
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
-
-  const userRef = doc(usersRef, userAuth.uid);
-
-  const userSnapshot = await getUserDocument(userAuth.uid);
-
-  if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
-    const createdAt = new Date();
-
-    try {
-      await setDoc(doc(usersRef, userAuth.uid), {
-        displayName,
-        email,
-        createdAt,
-        ...additionalData,
-      });
-    } catch (err) {}
+    return credential;
+  } catch (err) {
+    return err;
   }
-
-  return userRef;
 };
 
-export const getCurrentUser = () =>
-  new Promise((reseolve, reject) => {
-    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
-      unsubscribe();
-      reseolve(userAuth);
-    }, reject);
-  });
+// export const createUserProfileDocument = async (userAuth, additionalData) => {
+//   if (!userAuth) return;
+
+//   const userRef = db.doc(`users/${userAuth.uid}`);
+
+//   const snapshot = await userRef.get();
+
+//   if (!snapshot.exists) {
+//     const { displayName, email } = userAuth;
+//     const createdAt = new Date();
+
+//     try {
+//       await userRef.set({
+//         displayName,
+//         email,
+//         createdAt,
+//         ...additionalData,
+//       });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
+//   return userRef;
+// };
