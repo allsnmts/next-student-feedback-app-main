@@ -2,8 +2,8 @@ import React from "react";
 import Button from "./Button";
 
 export default function SigninButton({ microsoftSignInStart }) {
-  const redirectToFormsLink = () => {
-    window.location.href = "https://forms.office.com/r/6nmfPZW7ip";
+  const signIn = () => {
+    window.location.href = "/signin";
   };
 
   return (
@@ -11,8 +11,7 @@ export default function SigninButton({ microsoftSignInStart }) {
       className={
         "rounded-3xl hover:bg-primary hover:text-light dark:bg-darkComponents dark:text-light  hover:dark:bg-primaryDark/25 hover:dark:border-primaryDark/90"
       }
-      // onClick={redirectToFormsLink} // Change this code
-      // onClick= {}
+      onClick={signIn}
     >
       <svg
         className="mr-2 w-[20px] h-[20px] sm:w-[20px] sm:h-[20px] fill-dark dark:fill-light group-hover:fill-dark dark:group-hover:fill-light"
