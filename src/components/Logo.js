@@ -1,6 +1,6 @@
-import Link from "next/link";
-import React from "react";
-import { motion } from "framer-motion";
+import Link from 'next/link';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const MotionLink = motion(Link);
 
@@ -14,7 +14,7 @@ export default function Logo() {
           scale: 1.2,
         }}
       >
-        SFSA
+        USFA
       </MotionLink>
     </div>
   );

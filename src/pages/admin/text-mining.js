@@ -1,17 +1,17 @@
-import React from "react";
-import Head from "next/head";
-import PageTransition from "@/components/PageTransition";
-import AdminLayout from "@/layouts/AdminLayout";
-import StudentsTableContainer from "@/containers/StudentsTableContainer";
-import StudentCardContainer from "@/containers/StudentCardContainer";
-import CheckFeedbackDataContainer from "@/containers/CheckFeedbackDataContainer";
-import Modal from "@/components/Modal";
+import React from 'react';
+import Head from 'next/head';
+import PageTransition from '@/components/PageTransition';
+import AdminLayout from '@/layouts/AdminLayout';
+import StudentsTableContainer from '@/containers/StudentsTableContainer';
+import StudentCardContainer from '@/containers/StudentCardContainer';
+import CheckFeedbackDataContainer from '@/containers/CheckFeedbackDataContainer';
+import Modal from '@/components/Modal';
 
 export default function textMining() {
   return (
     <AdminLayout>
       <Head>
-        <title>RSFA | TM</title>
+        <title>USFA | TM</title>
         <meta name="description" content="" />
       </Head>
 

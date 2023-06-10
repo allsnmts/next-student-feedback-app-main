@@ -11,7 +11,8 @@ export default function SigninButton({ microsoftSignInStart }) {
       className={
         "rounded-3xl hover:bg-primary hover:text-light dark:bg-darkComponents dark:text-light  hover:dark:bg-primaryDark/25 hover:dark:border-primaryDark/90"
       }
-      onClick={redirectToFormsLink}
+      // onClick={redirectToFormsLink} // Change this code
+      // onClick= {}
     >
       <svg
         className="mr-2 w-[20px] h-[20px] sm:w-[20px] sm:h-[20px] fill-dark dark:fill-light group-hover:fill-dark dark:group-hover:fill-light"

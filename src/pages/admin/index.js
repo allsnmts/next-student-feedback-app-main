@@ -1,18 +1,18 @@
-import React from "react";
-import Head from "next/head";
-import PageTransition from "@/components/PageTransition";
-import AdminLayout from "@/layouts/AdminLayout";
-import CardBarChartContainer from "@/containers/CardBarChartContainer";
-import CardTableContainer from "@/containers/CardTableContainer";
-import AdminHeaderStatsContainer from "@/containers/AdminHeaderStatsContainer";
-import Modal from "@/components/Modal";
-import CheckFeedbackDataContainer from "@/containers/CheckFeedbackDataContainer";
+import React from 'react';
+import Head from 'next/head';
+import PageTransition from '@/components/PageTransition';
+import AdminLayout from '@/layouts/AdminLayout';
+import CardBarChartContainer from '@/containers/CardBarChartContainer';
+import CardTableContainer from '@/containers/CardTableContainer';
+import AdminHeaderStatsContainer from '@/containers/AdminHeaderStatsContainer';
+import Modal from '@/components/Modal';
+import CheckFeedbackDataContainer from '@/containers/CheckFeedbackDataContainer';
 
 export default function sentimentAnalysis() {
   return (
     <AdminLayout>
       <Head>
-        <title>Student Feedback Sentiment Analyzer | SA</title>
+        <title>USFA | SA</title>
         <meta name="description" content="" />
       </Head>
 

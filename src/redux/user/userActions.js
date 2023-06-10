@@ -6,7 +6,7 @@ import {
   SIGN_OUT_START,
   SIGN_OUT_SUCCESS,
   SIGN_OUT_FAILURE,
-} from "./userActionTypes";
+} from './userActionTypes';
 
 export const microsoftSignInStart = () => ({
   type: MICROSOFT_SIGN_IN_START,

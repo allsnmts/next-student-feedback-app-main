@@ -1,76 +1,65 @@
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "firebase/app";
+import { OAuthProvider, getAuth } from "firebase/auth";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyAIHFMwwQrrMWhQJA0h2PyR1jKQEDhVt5g",
-  authDomain: "sentiment-analyzer-8b590.firebaseapp.com",
-  projectId: "sentiment-analyzer-8b590",
-  storageBucket: "sentiment-analyzer-8b590.appspot.com",
-  messagingSenderId: "966109779808",
-  appId: "1:966109779808:web:2741c02b6acd5936a73005",
-  measurementId: "G-T1ZQDGCQF0"
+  apiKey: "AIzaSyCyGN5LO-J23PUEV7yyvjOOwjAyahcimHM",
+  authDomain: "next-student-feedback.firebaseapp.com",
+  projectId: "next-student-feedback",
+  storageBucket: "next-student-feedback.appspot.com",
+  messagingSenderId: "909976799198",
+  appId: "1:909976799198:web:88472cf1fd17898bd5ff4f",
 };
-// import { initializeApp } from 'firebase/app';
-// import { getAuth, signInWithPopup, OAuthProvider } from 'firebase/auth';
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyAIHFMwwQrrMWhQJA0h2PyR1jKQEDhVt5g",
-//   authDomain: "sentiment-analyzer-8b590.firebaseapp.com",
-//   projectId: "sentiment-analyzer-8b590",
-//   storageBucket: "sentiment-analyzer-8b590.appspot.com",
-//   messagingSenderId: "966109779808",
-//   appId: "1:966109779808:web:2741c02b6acd5936a73005",
-//   measurementId: "G-T1ZQDGCQF0"
-// };
-// // const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig),
+  auth = getAuth(),
+  microsoftProvider = new OAuthProvider("microsoft.com");
 
-// export const auth = getAuth(app);
+export const db = getFirestore(app);
+const usersRef = collection(db, "users");
 
-// export const microsoftProvider = new OAuthProvider('microsoft.com');
+export const getUserDocument = async (userUid) => {
+  const userRef = doc(usersRef, userUid);
 
-// // microsoftProvider.setCustomParameters({
-// //   prompt: 'consent',
-// //   tenant: '',
-// //   client_id: ' 6fc362f9-4db9-4992-8a5d-778e8d13bbfd',
-// //   response_type: '',
-// //   redirect_uri: 'https://next-student-feedback.firebaseapp.com/__/auth/handler',
-// //   scope: ['user.read'],
-// //   response_mode: '',
-// // });
+  const userSnapshot = await getDoc(userRef);
 
-// export const signInWithMicrosoftAsync = async () => {
-//   const res = await signInWithPopup(auth, microsoftProvider);
+  return userSnapshot;
+};
 
-//   try {
-//     const credential = OAuthProvider.credentialFromResult(res);
-//     const { accessToken, idToken } = credential;
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return;
 
-//     return credential;
-//   } catch (err) {
-//     return err;
-//   }
-// };
+  const userRef = doc(usersRef, userAuth.uid);
 
-// // export const createUserProfileDocument = async (userAuth, additionalData) => {
-// //   if (!userAuth) return;
+  const userSnapshot = await getUserDocument(userAuth.uid);
 
-// //   const userRef = db.doc(`users/${userAuth.uid}`);
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
 
-// //   const snapshot = await userRef.get();
+    try {
+      await setDoc(doc(usersRef, userAuth.uid), {
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    } catch (err) {}
+  }
 
-// //   if (!snapshot.exists) {
-// //     const { displayName, email } = userAuth;
-// //     const createdAt = new Date();
+  return userRef;
+};
 
-// //     try {
-// //       await userRef.set({
-// //         displayName,
-// //         email,
-// //         createdAt,
-// //         ...additionalData,
-// //       });
-// //     } catch (err) {
-// //       console.log(err);
-// //     }
-// //   }
-
-// //   return userRef;
-// // };
+export const getCurrentUser = () =>
+  new Promise((reseolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      reseolve(userAuth);
+    }, reject);
+  });

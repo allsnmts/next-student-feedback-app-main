@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Logo from "../Logo";
-import { useRouter } from "next/router";
-import SidebarContainer from "@/containers/SidebarContainer";
-import SigninButtonContainer from "@/containers/SigninButtonContainer";
-import UserDropdownContainer from "@/containers/UserDropdownContainer";
-import ThemeButton from "../Buttons/ThemeButton";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Logo from '../Logo';
+import { useRouter } from 'next/router';
+import SidebarContainer from '@/containers/SidebarContainer';
+import SigninButtonContainer from '@/containers/SigninButtonContainer';
+import UserDropdownContainer from '@/containers/UserDropdownContainer';
+import ThemeButton from '../Buttons/ThemeButton';
 
 const CustomLink = ({ href, title }) => {
   const router = useRouter();
@@ -15,15 +15,15 @@ const CustomLink = ({ href, title }) => {
       href={href}
       title={title}
       className={`mx-4 relative group ${
-        router.asPath === href ? "text-primary dark:text-primaryDark" : "w-0"
+        router.asPath === href ? 'text-primary dark:text-primaryDark' : 'w-0'
       }`}
     >
       {title}
       <span
         className={`h-[1px] inline-block bg-dark absolute left-0 -bottom-0.5 group-hover:w-full transition-[width] ease duration-300 ${
           router.asPath === href
-            ? "w-full bg-primary dark:bg-primaryDark"
-            : "w-0"
+            ? 'w-full bg-primary dark:bg-primaryDark'
+            : 'w-0'
         } dark:bg-light`}
       >
         &nbsp;
@@ -36,12 +36,12 @@ export default function NavBar({ routesArr, navMode, currentUser }) {
   const [showBackground, setShowBackground] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       window.scrollY > 50 ? setShowBackground(true) : setShowBackground(false);
     });
 
     return () => {
-      window.removeEventListener("scroll", null);
+      window.removeEventListener('scroll', null);
     };
   }, []);
 
@@ -49,12 +49,12 @@ export default function NavBar({ routesArr, navMode, currentUser }) {
     <nav
       className={`w-full fixed z-20 px-32 py-8 font-medium flex items-center justify-between dark:text-light lg:px-16 md:px-12 sm:px-8 ${
         showBackground &&
-        "bg-light dark:bg-dark dark:border-primaryDark/90 border-b shadow-lg"
+        'bg-light dark:bg-dark dark:border-primaryDark/90 border-b shadow-lg'
       }`}
     >
       <div
         className={`w-full flex justify-between items-center lg:hidden ${
-          navMode === "drawer" && "hidden"
+          navMode === 'drawer' && 'hidden'
         }`}
       >
         <nav>
