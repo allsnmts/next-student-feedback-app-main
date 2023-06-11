@@ -6,6 +6,8 @@ export const userRoutes = [
   { href: "/team", title: "Team" },
 ];
 
+export const otherRoutes = [{ href: "/signin", title: "Sign in" }];
+
 export const adminRoutes = [
   {
     href: "/admin",

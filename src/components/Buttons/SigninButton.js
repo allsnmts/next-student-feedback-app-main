@@ -3,7 +3,7 @@ import Button from "./Button";
 
 export default function SigninButton({ microsoftSignInStart }) {
   const signIn = () => {
-    window.location.href = "/signin";
+    location.href = "/signin_menu";
   };
 
   return (
