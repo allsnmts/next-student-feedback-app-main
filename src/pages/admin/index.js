@@ -12,7 +12,7 @@ export default function sentimentAnalysis() {
   return (
     <AdminLayout>
       <Head>
-        <title>USFA | SA</title>
+        <title>SFSA | SA</title>
         <meta name="description" content="" />
       </Head>
 

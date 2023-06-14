@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>USFA | Home</title>
+        <title>SFSA | Home</title>
         <meta name="description" content="" />
       </Head>
 

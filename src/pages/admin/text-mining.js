@@ -11,7 +11,7 @@ export default function textMining() {
   return (
     <AdminLayout>
       <Head>
-        <title>USFA | TM</title>
+        <title>SFSA | TM</title>
         <meta name="description" content="" />
       </Head>
 

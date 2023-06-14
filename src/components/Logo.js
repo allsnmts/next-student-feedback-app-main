@@ -14,7 +14,7 @@ export default function Logo() {
           scale: 1.2,
         }}
       >
-        USFA
+        SFSA
       </MotionLink>
     </div>
   );

@@ -24,7 +24,7 @@ export default function about() {
   return (
     <>
       <Head>
-        <title>USFA | About</title>
+        <title>SFSA | About</title>
         <meta name="description" content="" />
       </Head>
 
