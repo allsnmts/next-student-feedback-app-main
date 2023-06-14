@@ -1,15 +1,15 @@
-import React, { useRef } from "react";
-import Head from "next/head";
-import dashboard from "../../public/images/dashboard.jpg";
+import React, { useRef } from 'react';
+import Head from 'next/head';
+import dashboard from '../../public/images/dashboard.jpg';
 import {
   AnimatedTextSpring,
   AnimatedTextTypeWriter,
-} from "@/components/AnimatedText";
-import Layout from "@/layouts/Layout";
-import Image from "next/image";
-import { aboutPage } from "../content/pages";
-import PageTransition from "@/components/PageTransition";
-import AnimatedList from "@/components/AnimatedList";
+} from '@/components/AnimatedText';
+import Layout from '@/layouts/Layout';
+import Image from 'next/image';
+import { aboutPage } from '../content/pages';
+import PageTransition from '@/components/PageTransition';
+import AnimatedList from '@/components/AnimatedList';
 
 export default function about() {
   const {
@@ -35,8 +35,8 @@ export default function about() {
             <div
               key={i}
               className={`flex items-center justify-between w-full lg:flex-col ${
-                i < aboutSectionArr.length - 1 && "mb-32 md:mb-16"
-              } ${i % 2 === 1 && "flex-row-reverse"} gap-8`}
+                i < aboutSectionArr.length - 1 && 'mb-32 md:mb-16'
+              } ${i % 2 === 1 && 'flex-row-reverse'} gap-8`}
             >
               <div className="w-1/2 md:w-full border border-solid shadow-lg dark:bg-dark dark:border-light">
                 <Image
@@ -73,10 +73,10 @@ export default function about() {
             <div
               key={i}
               className={`w-full px-10 xl:p-24 lg:p-16 md:p-12 sm:p-8 ${
-                i < 3 && "my-48 md:my-16"
+                i < 3 && 'my-48 md:my-16'
               }`}
             >
-              {/* {v['textSectionArr'].map((e, i) => (
+              {v['textSectionArr'].map((e, i) => (
                 <div key={i} className="flex flex-col mb-16 w-full text-center">
                   <AnimatedTextTypeWriter
                     text={e?.title}
@@ -91,8 +91,8 @@ font-medium md:text-sm sm:text-xs"
                     />
                   ))}
                 </div>
-              ))} */}
-              {/* {v["liArr"] && <AnimatedList liArr={v["liArr"]} />} */}
+              ))}
+              {v['liArr'] && <AnimatedList liArr={v['liArr']} />}
             </div>
           ))}
         </Layout>

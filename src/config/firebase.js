@@ -1,28 +1,28 @@
-import { initializeApp } from "firebase/app";
-import { OAuthProvider, getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { OAuthProvider, getAuth } from 'firebase/auth';
 import {
   getFirestore,
   collection,
   doc,
   getDoc,
   setDoc,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCyGN5LO-J23PUEV7yyvjOOwjAyahcimHM",
-  authDomain: "next-student-feedback.firebaseapp.com",
-  projectId: "next-student-feedback",
-  storageBucket: "next-student-feedback.appspot.com",
-  messagingSenderId: "909976799198",
-  appId: "1:909976799198:web:88472cf1fd17898bd5ff4f",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 export const app = initializeApp(firebaseConfig),
   auth = getAuth(),
-  microsoftProvider = new OAuthProvider("microsoft.com");
+  microsoftProvider = new OAuthProvider('microsoft.com');
 
 export const db = getFirestore(app);
-const usersRef = collection(db, "users");
+const usersRef = collection(db, 'users');
 
 export const getUserDocument = async (userUid) => {
   const userRef = doc(usersRef, userUid);
