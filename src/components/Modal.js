@@ -28,7 +28,7 @@ export default function Modal() {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 p-4">
             <div className="flex items-start justify-between border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Upload ur CSV Document
+                Upload Excel File
               </h3>
               <button
                 onClick={handleModalClose}
