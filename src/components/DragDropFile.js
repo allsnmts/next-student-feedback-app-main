@@ -39,13 +39,40 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
     };
   }, []);
 
+  // const convertToCsv = () => {
+  //   if (file) {
+  //     convertCSVFile(file);
+  //     handleModalClose();
+  //   }
+  // };
   const convertToCsv = () => {
     if (file) {
-      convertCSVFile(file);
+      // Perform API request to the server-side endpoint
+      // Create a new FileReader instance
+      const reader = new FileReader();
+
+      // Define the callback function for when file reading is complete
+      reader.onload = (e) => {
+        const fileData = e.target.result;      
+      fetch('/sentiment-analysis', { method: 'POST' })
+        .then((response) => {
+          if (response.ok) {
+            // Handle success
+            // You can display a success message or perform any other actions here
+            console.log('Sentiment analysis completed successfully');
+          } else {
+            // Handle error
+            console.error('Error during sentiment analysis');
+          }
+        })
+        .catch((error) => {
+          // Handle network or other errors
+          console.error('An error occurred during the API request', error);
+        });
+
       handleModalClose();
     }
   };
-
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
     if (newFile.name) {
