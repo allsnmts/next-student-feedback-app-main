@@ -9,13 +9,13 @@ import {
 } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCyGN5LO-J23PUEV7yyvjOOwjAyahcimHM",
-  // apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  apiKey: "AIzaSyCuglutPhIHeROP3qI0gIfoRPW-xalmDQo",
+  authDomain: "student-sentiment-analyzer.firebaseapp.com",
+  projectId: "student-sentiment-analyzer",
+  storageBucket: "student-sentiment-analyzer.appspot.com",
+  messagingSenderId: "790489988365",
+  appId: "1:790489988365:web:b980068c73091961828444",
+  measurementId: "G-8J81SJYEBM",
 };
 
 export const app = initializeApp(firebaseConfig),
