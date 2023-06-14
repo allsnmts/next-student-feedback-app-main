@@ -1,27 +1,27 @@
-import DragDropFileContainer from '@/containers/DragDropFileContainer';
-import React, { useState } from 'react';
-import Button from './Buttons/Button';
+import DragDropFileContainer from "@/containers/DragDropFileContainer";
+import React, { useState } from "react";
+import Button from "./Buttons/Button";
 
 export default function Modal() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
-    document.body.classList.add('no-scroll');
+    document.body.classList.add("no-scroll");
     setModalOpen(true);
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
-    document.body.classList.remove('no-scroll');
+    document.body.classList.remove("no-scroll");
   };
 
   return (
     <>
-      <Button onClick={handleModalOpen}>Upload CSV File</Button>
+      <Button onClick={handleModalOpen}>Upload Excel File</Button>
 
       <div
         className={`${
-          modalOpen ? 'absolute z-50' : 'hidden'
+          modalOpen ? "absolute z-50" : "hidden"
         } w-full h-full top-0 left-0 bg-dark/50 flex items-center justify-center`}
       >
         <div className="relative w-full max-w-2xl max-h-full">

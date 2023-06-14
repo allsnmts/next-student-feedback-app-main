@@ -1,11 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Button from './Buttons/Button';
+import { PythonShell } from "python-shell";
+import React, { useRef, useState, useEffect } from "react";
+import { faFileCsv } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from "./Buttons/Button";
+import axios from "axios";
 
 export default function DragDropFile({ convertCSVFile, handleModalClose }) {
-  const dragDropRef = useRef(null),
-    [file, setFile] = useState(null);
+  const dragDropRef = useRef(null);
+  const [file, setFile] = useState(null);
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -29,50 +31,36 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
     if (dragDropRef.current) ref = dragDropRef.current;
 
     if (ref) {
-      ref.addEventListener('dragover', onDragOver);
-      ref.addEventListener('drop', onDrop);
+      ref.addEventListener("dragover", onDragOver);
+      ref.addEventListener("drop", onDrop);
     }
 
     return () => {
-      ref.removeEventListener('dragover', onDragOver);
-      ref.removeEventListener('drop', onDrop);
+      ref.removeEventListener("dragover", onDragOver);
+      ref.removeEventListener("drop", onDrop);
     };
   }, []);
 
-  // const convertToCsv = () => {
-  //   if (file) {
-  //     convertCSVFile(file);
-  //     handleModalClose();
-  //   }
-  // };
+  // const convertToCsv = () => {};
   const convertToCsv = () => {
-    if (file) {
-      // Perform API request to the server-side endpoint
-      // Create a new FileReader instance
-      const reader = new FileReader();
+    // Perform the desired Python code execution here
+    // You can make a request to a server that runs the Python code using axios
+    // axios
+    //   .post("/run-python-code", { file })
+    //   .then((response) => {
+    //     // Handle the response from the server
+    //     console.log(response.data);
+    //   })
+    //   .catch((error) => {
+    //     // Handle errors
+    //     console.error(error);
+    //   });
 
-      // Define the callback function for when file reading is complete
-      reader.onload = (e) => {
-        const fileData = e.target.result;      
-      fetch('/sentiment-analysis', { method: 'POST' })
-        .then((response) => {
-          if (response.ok) {
-            // Handle success
-            // You can display a success message or perform any other actions here
-            console.log('Sentiment analysis completed successfully');
-          } else {
-            // Handle error
-            console.error('Error during sentiment analysis');
-          }
-        })
-        .catch((error) => {
-          // Handle network or other errors
-          console.error('An error occurred during the API request', error);
-        });
-
-      handleModalClose();
-    }
+    PythonShell.runString("x=1+1;print(x)", null).then((messages) => {
+      console.log("finished");
+    });
   };
+
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
     if (newFile.name) {
@@ -85,7 +73,7 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
   };
 
   const formatToKB = (bytes) => {
-    if (!+bytes) return '0 Bytes';
+    if (!+bytes) return "0 Bytes";
 
     const k = 1024;
     const i = Math.floor(Math.log(bytes) / Math.log(k));
@@ -120,7 +108,6 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
               <span className="font-semibold">Click to upload</span> or drag and
               drop
             </p>
-            {/* <p className="text-xs text-gray-500 dark:text-gray-400">CSV only</p> */}
           </div>
           <input
             onChange={onFileDrop}
@@ -134,7 +121,7 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
       <div className="flex flex-col justify-between items-start">
         <ul
           className={`${
-            !file ? 'opacity-0' : 'opacity-1'
+            !file ? "opacity-0" : "opacity-1"
           } max-w-md divide-y divide-gray-200 dark:divide-gray-700`}
         >
           <li className="pb-3 sm:pb-4">
@@ -158,7 +145,8 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
         </ul>
         <Button
           onClick={convertToCsv}
-          className={`${!file && `!opacity-50 !cursor-not-allowed`}`}
+          disabled={!file} // Disable the button if no file is selected
+          className={`${!file && "opacity-50 cursor-not-allowed"}`}
         >
           Perform Sentiment Analysis
         </Button>
