@@ -2,12 +2,12 @@ import React from "react";
 import Head from "next/head";
 import PageTransition from "@/components/PageTransition";
 import Button from "@/components/Buttons/Button";
-
+  
 export default function SignInMenu() {
-  const admin_dashboard = () => {
-    location.href = "/admin/dashboard";
+  
+  const admin_form = () => {
+    location.href = "/admin_menu";
   };
-
   return (
     <>
       <Head>
@@ -18,12 +18,17 @@ export default function SignInMenu() {
       <PageTransition />
       <main className="flex items-center justify-center w-full min-h-screen">
         <div className="flex flex-col items-center">
-          <Button className="font-semibold rounded-3xl text-lg mb-4 btn-large">
+          <Button 
+          className="font-semibold rounded-3xl text-lg mb-4 btn-large"
+          >
             Student
           </Button>
-          <Button className="font-semibold rounded-3xl text-lg btn-large"
-          onClick={admin_dashboard}>
-            Admin
+          
+          <Button 
+          className="font-semibold rounded-3xl text-lg btn-large"
+          // onClick={}
+          >
+            Upload
           </Button>
         </div>
       </main>

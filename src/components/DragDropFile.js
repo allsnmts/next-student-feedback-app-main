@@ -2,10 +2,11 @@ import React, { useRef, useState, useEffect } from 'react';
 import { faFileCsv } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from './Buttons/Button';
+import { exec } from 'child_process';
 
-export default function DragDropFile({ convertCSVFile, handleModalClose }) {
-  const dragDropRef = useRef(null),
-    [file, setFile] = useState(null);
+export default function DragDropFile({ handleModalClose }) {
+  const dragDropRef = useRef(null);
+  const [file, setFile] = useState(null);
 
   const onDragOver = (e) => {
     e.preventDefault();
@@ -24,6 +25,10 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
     }
   };
 
+  const spawner = require('child_process').spawn;
+  
+  const python_process = spawner('python', ['sentiment_analysis.py', JSON.stringify(file)])
+  
   useEffect(() => {
     let ref = null;
     if (dragDropRef.current) ref = dragDropRef.current;
@@ -39,12 +44,26 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
     };
   }, []);
 
-  const convertToCsv = () => {
-    if (file) {
-      convertCSVFile(file);
-      handleModalClose();
-    }
+  // const runPythonCode = () => {
+  // };
+  const runPythonCode = () => {
+    // Execute your Python code here
+    python_process.stdout.on('data', (data) => {
+      console.log(`Received data from Python: ${data}`);
+      // Process the data returned by the Python script
+    });
+  
+    python_process.stderr.on('data', (data) => {
+      console.error(`Error received from Python: ${data}`);
+      // Handle any errors from the Python script
+    });
+  
+    python_process.on('close', (code) => {
+      console.log(`Python process exited with code ${code}`);
+      // Perform any necessary actions after the Python script completes
+    });
   };
+  
 
   const onFileDrop = (e) => {
     const newFile = e.target.files[0];
@@ -93,13 +112,13 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
               <span className="font-semibold">Click to upload</span> or drag and
               drop
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">CSV only</p>
+            {/* <p className="text-xs text-gray-500 dark:text-gray-400">Excel only</p> */}
           </div>
           <input
             onChange={onFileDrop}
             id="dropzone-file"
             type="file"
-            accept=".csv"
+            accept=".xlsx"
             className="hidden"
           />
         </label>
@@ -130,10 +149,10 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
           </li>
         </ul>
         <Button
-          onClick={convertToCsv}
+          onClick={runPythonCode}
           className={`${!file && `!opacity-50 !cursor-not-allowed`}`}
         >
-          Generate charts
+          Run Python Code
         </Button>
       </div>
     </div>
