@@ -133,7 +133,7 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
           onClick={convertToCsv}
           className={`${!file && `!opacity-50 !cursor-not-allowed`}`}
         >
-          Generate charts
+          Perform Sentiment Analysis
         </Button>
       </div>
     </div>
