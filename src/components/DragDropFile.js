@@ -118,7 +118,7 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
             onChange={onFileDrop}
             id="dropzone-file"
             type="file"
-            accept=".csv"
+            accept=".xlsx"
             className="hidden"
           />
         </label>
