@@ -39,24 +39,17 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
     };
   }, []);
 
-  // const convertToCsv = () => {
-  //   if (file) {
-  //     convertCSVFile(file);
-  //     handleModalClose();
-  //   }
-  // };
-  const handleSignin = async () => {
+  const uploadFile = async () => {
     try {
+      const formData = new FormData();
+      formData.append("file", file); // Append the file to the form data
+
       const response = await fetch("/api/new", {
         method: "POST",
+        body: formData, // Send the form data containing the file
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to execute Python script");
-      }
-
-      const data = await response.json();
-      console.log(data); // Handle the response data as needed
+      // Rest of the code...
     } catch (error) {
       console.error(error);
     }
@@ -154,7 +147,7 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
         >
           Perform Sentiment Analysis
         </Button> */}
-        <Button className={"rounded-3xl"} onClick={handleSignin}>
+        <Button className={"rounded-3xl"} onClick={uploadFile}>
           {/* Your SVG and text elements */}
           Perform Sentiment Analysis
         </Button>
