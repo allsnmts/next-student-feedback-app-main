@@ -57,10 +57,10 @@ export default function DragDropFile({ convertCSVFile, handleModalClose }) {
 
       const data = await response.json();
       console.log(data); // Handle the response data as needed
-      handleModalClose();
     } catch (error) {
       console.error(error);
     }
+    handleModalClose();
   };
 
   const onFileDrop = (e) => {
